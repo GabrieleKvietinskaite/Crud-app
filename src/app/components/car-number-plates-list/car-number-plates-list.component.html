@@ -1,0 +1,54 @@
+<div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+<div class="carNumberPlatesTable">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let plate"> {{plate.Id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="carNumberPlate">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Car number plate</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let plate"> {{plate.NumberPlate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let plate"> {{plate.FirstName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let plate"> {{plate.LastName}} </mat-cell>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>
+                    <button mat-icon-button color="primary" (click)="create()">
+                    <mat-icon>create</mat-icon>
+                </button>
+                </mat-header-cell>
+
+                <mat-cell mat-cell *matCellDef="let plate; let i=index;">
+                    <button mat-icon-button color="accent" (click)="update(plate)">
+                        <mat-icon>update</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="accent" (click)="delete(plate.Id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
